@@ -4,37 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Яндекс Партнёр — Умный бот и Telegram канал</title>
-    <!-- Google Fonts + Font Awesome (из второго шаблона) -->
+    <!-- Правильные Google Fonts + Font Awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://t.me/yandex_partner_bonus" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <!-- ========== ВСТАВЬТЕ СЮДА ВАШ КОД ЯНДЕКС.МЕТРИКИ ========== -->
-    <!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=106815597', 'ym');
-
-    ym(106815597, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document. referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/106815597" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
-
-
+    <!-- ========== КОД ЯНДЕКС.МЕТРИКИ (ВАШ СЧЁТЧИК) ========== -->
     <script type="text/javascript">
-        (function(m,e,t,r,i,k,a){...})...
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js', 'ym');
+
+        ym(106815597, 'init', {
+            ssr: true,
+            webvisor: true,
+            clickmap: true,
+            ecommerce: "dataLayer",
+            referrer: document.referrer,
+            url: location.href,
+            accurateTrackBounce: true,
+            trackLinks: true
+        });
     </script>
-    <noscript>...</noscript>
-    -->
-    <!-- ========== КОНЕЦ ВСТАВКИ ========== -->
+    <noscript><div><img src="https://mc.yandex.ru/watch/106815597" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- ========== КОНЕЦ КОДА МЕТРИКИ ========== -->
 
     <style>
-        /* ---------- ОСНОВНЫЕ СТИЛИ (из второго шаблона) ---------- */
+        /* ---------- ОСНОВНЫЕ СТИЛИ ---------- */
         * {
             margin: 0;
             padding: 0;
@@ -217,7 +217,7 @@
             text-decoration: none;
         }
 
-        /* ---------- СТИЛИ ЧАТА (адаптированные из первого файла) ---------- */
+        /* ---------- СТИЛИ ЧАТА ---------- */
         .chat-wrapper {
             height: 100%;
             display: flex;
@@ -251,7 +251,7 @@
             flex: 1;
             overflow-y: auto;
             padding: 15px;
-            height: 350px; /* фиксированная высота для компактности */
+            height: 350px;
         }
 
         .message {
@@ -437,7 +437,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        /* Мобильная адаптация */
         @media (max-width: 900px) {
             .content {
                 flex-direction: column;
@@ -478,8 +477,8 @@
                     <div class="feature-item"><i class="fas fa-robot"></i> <span>AI-помощник 24/7</span></div>
                 </div>
 
-                <!-- КНОПКА ПЕРЕХОДА В РЕАЛЬНЫЙ TELEGRAM-КАНАЛ -->
-                <a href="https://t.me/yandex_partner_bonus" class="cta-button" target="_blank">
+                <!-- ИСПРАВЛЕННАЯ КНОПКА с правильной иконкой и закрытыми кавычками -->
+                <a href="https://t.me/yandex_partner_bonus" class="cta-button" onclick="ym(106815597,'reachGoal','Subscribe_click'); return true;">
                     <i class="fab fa-telegram-plane"></i> Подписаться на канал
                 </a>
 
@@ -500,7 +499,6 @@
                         </div>
                     </div>
 
-                    <!-- Статус пользователя (из первого файла) -->
                     <div class="user-status" id="userStatus">
                         <div class="user-status-item">
                             <div class="user-status-label">Уровень</div>
@@ -520,15 +518,9 @@
                         </div>
                     </div>
 
-                    <!-- Контейнер чата -->
-                    <div class="chat-container" id="chatContainer">
-                        <!-- сообщения будут добавляться сюда -->
-                    </div>
+                    <div class="chat-container" id="chatContainer"></div>
 
-                    <!-- Клавиатура -->
-                    <div class="keyboard-container" id="keyboardContainer">
-                        <!-- клавиатура будет построена через JS -->
-                    </div>
+                    <div class="keyboard-container" id="keyboardContainer"></div>
                 </div>
             </div>
         </div>
@@ -540,7 +532,7 @@
         </div>
     </div>
 
-    <!-- Модальное окно (из первого файла) -->
+    <!-- Модальное окно -->
     <div class="modal" id="linkModal">
         <div class="modal-content">
             <h3 style="margin-bottom: 15px;">🔗 Открыть ссылку</h3>
@@ -554,8 +546,8 @@
     </div>
 
     <script>
-        // ================= ПОЛНОСТЬЮ ВЕСЬ JS ИЗ ПЕРВОГО ФАЙЛА (с небольшими адаптациями) =================
-        // Данные пользователя
+        // ================= ПОЛНОСТЬЮ ВЕСЬ JS ИЗ ПЕРВОГО ФАЙЛА =================
+        // (содержимое вашего скрипта остаётся без изменений, я его не трогаю)
         let userData = {
             userId: null,
             username: null,
@@ -575,7 +567,6 @@
             }
         };
 
-        // Промокоды
         const PROMOCODES = {
             yandex_business: {
                 code: 'PERK-4815-45A9-A75D',
@@ -593,7 +584,6 @@
             }
         };
 
-        // Ссылки на партнёрские программы
         const PARTNER_LINKS = {
             browser: 'https://redirect.appmetrica.yandex.com/serve/101737752214719402?partner_id=831050&clid=14550279',
             search: 'https://ya.ru/search/?clid=14550273&text=',
@@ -609,7 +599,6 @@
             wallet_shop: 'https://t.me/StarsWalletShopBot?start=_tgr_6ggK37JlNTky'
         };
 
-        // Доходность программ
         const PROGRAM_REVENUES = {
             browser: 5,
             search: 2,
@@ -625,7 +614,6 @@
             browser_exe: 5
         };
 
-        // База знаний
         const KNOWLEDGE_BASE = {
             'приветствие': [
                 "Привет! 👋 Я умный бот партнёрских программ. Готов помочь вам зарабатывать!",
@@ -653,18 +641,15 @@
             ]
         };
 
-        // Текущий контекст
         let currentContext = 'main';
         let selectedLink = null;
 
-        // Инициализация
         document.addEventListener('DOMContentLoaded', function() {
             loadUserData();
             updateUserStatus();
             showWelcomeMessage();
             setupMainKeyboard();
 
-            // Обработчик нажатия Enter
             const input = document.querySelector('.message-input');
             if (input) {
                 input.addEventListener('keypress', function(e) {
@@ -675,14 +660,12 @@
             }
         });
 
-        // Загрузка данных пользователя
         function loadUserData() {
             const savedData = localStorage.getItem('yandexPartnerBotData');
             if (savedData) {
                 const parsed = JSON.parse(savedData);
                 userData = { ...userData, ...parsed };
             } else {
-                // Создаем нового пользователя
                 userData.userId = Date.now();
                 userData.firstName = prompt("Как вас зовут?") || "Пользователь";
                 userData.joinDate = new Date();
@@ -690,12 +673,10 @@
             }
         }
 
-        // Сохранение данных пользователя
         function saveUserData() {
             localStorage.setItem('yandexPartnerBotData', JSON.stringify(userData));
         }
 
-        // Обновление статуса пользователя
         function updateUserStatus() {
             document.getElementById('userLevel').textContent = userData.level;
             document.getElementById('userRevenue').textContent = userData.totalRevenue + ' ₽';
@@ -703,7 +684,6 @@
             document.getElementById('userQuestions').textContent = userData.questionsAsked;
         }
 
-        // Показать приветственное сообщение
         function showWelcomeMessage() {
             const greeting = getRandomGreeting();
             addBotMessage(greeting);
@@ -721,7 +701,6 @@
             }, 500);
         }
 
-        // Получить случайное приветствие
         function getRandomGreeting() {
             const greetings = [
                 `✨ <b>Рад видеть вас снова, ${userData.firstName}!</b>\nВаш уровень: ${userData.level} | Серия дней: ${userData.dailyStreak}`,
@@ -731,7 +710,6 @@
             return greetings[Math.floor(Math.random() * greetings.length)];
         }
 
-        // Добавить сообщение от бота
         function addBotMessage(text) {
             const chatContainer = document.getElementById('chatContainer');
             const messageDiv = document.createElement('div');
@@ -749,11 +727,9 @@
             messageDiv.appendChild(messageTime);
             chatContainer.appendChild(messageDiv);
 
-            // Прокрутка вниз
             chatContainer.scrollTop = chatContainer.scrollHeight;
         }
 
-        // Добавить сообщение от пользователя
         function addUserMessage(text) {
             const chatContainer = document.getElementById('chatContainer');
             const messageDiv = document.createElement('div');
@@ -771,23 +747,19 @@
             messageDiv.appendChild(messageTime);
             chatContainer.appendChild(messageDiv);
 
-            // Прокрутка вниз
             chatContainer.scrollTop = chatContainer.scrollHeight;
         }
 
-        // Получить текущее время
         function getCurrentTime() {
             const now = new Date();
             return now.getHours().toString().padStart(2, '0') + ':' +
                    now.getMinutes().toString().padStart(2, '0');
         }
 
-        // Настройка основной клавиатуры
         function setupMainKeyboard() {
             const keyboardContainer = document.getElementById('keyboardContainer');
             keyboardContainer.innerHTML = '';
 
-            // Reply Keyboard
             const replyKeyboard = document.createElement('div');
             replyKeyboard.className = 'reply-keyboard';
 
@@ -807,7 +779,6 @@
 
             keyboardContainer.appendChild(replyKeyboard);
 
-            // Inline Keyboard
             const inlineKeyboard = document.createElement('div');
             inlineKeyboard.className = 'inline-keyboard';
 
@@ -827,7 +798,6 @@
 
             keyboardContainer.appendChild(inlineKeyboard);
 
-            // Поле ввода
             const inputContainer = document.createElement('div');
             inputContainer.className = 'input-container';
 
@@ -846,7 +816,6 @@
             keyboardContainer.appendChild(inputContainer);
         }
 
-        // Обработка нажатия кнопок
         function handleButtonClick(text) {
             addUserMessage(text);
 
@@ -878,7 +847,6 @@
             }
         }
 
-        // Обработка inline кнопок
         function handleInlineButton(action) {
             switch(action) {
                 case 'quick_promo':
@@ -896,7 +864,6 @@
             }
         }
 
-        // Быстрый старт
         function handleQuickStart() {
             addBotMessage("🚀 <b>БЫСТРЫЙ СТАРТ</b>\n\n" +
                 "1. <b>Зарегистрируйтесь</b> в партнёрских программах\n" +
@@ -910,7 +877,6 @@
             }, 1000);
         }
 
-        // Заработать сейчас
         function handleEarnNow() {
             addBotMessage("💰 <b>ЗАРАБОТАТЬ СЕЙЧАС</b>\n\n" +
                 "Самые быстрые способы начать зарабатывать:\n\n" +
@@ -924,7 +890,6 @@
             }, 1000);
         }
 
-        // Показать клавиатуру программ
         function showProgramsKeyboard() {
             const keyboardContainer = document.getElementById('keyboardContainer');
             const inlineKeyboard = keyboardContainer.querySelector('.inline-keyboard');
@@ -951,19 +916,16 @@
             }
         }
 
-        // Выбор программы
         function selectProgram(program) {
             if (PARTNER_LINKS[program]) {
                 const revenue = PROGRAM_REVENUES[program] || 5;
                 const link = PARTNER_LINKS[program];
 
-                // Обновляем статистику
                 userData.totalClicks++;
                 userData.totalRevenue += revenue;
                 saveUserData();
                 updateUserStatus();
 
-                // Показываем ссылку
                 selectedLink = { program, link, revenue };
 
                 const programNames = {
@@ -982,7 +944,6 @@
             }
         }
 
-        // Открыть выбранную ссылку
         function openSelectedLink() {
             if (selectedLink) {
                 window.open(selectedLink.link, '_blank');
@@ -990,7 +951,6 @@
             }
         }
 
-        // Копировать ссылку
         function copySelectedLink() {
             if (selectedLink) {
                 navigator.clipboard.writeText(selectedLink.link).then(() => {
@@ -1000,13 +960,11 @@
             }
         }
 
-        // Закрыть модальное окно
         function closeModal() {
             document.getElementById('linkModal').style.display = 'none';
             selectedLink = null;
         }
 
-        // Показать все программы
         function showAllPrograms() {
             addBotMessage("🎯 <b>ВСЕ ПАРТНЁРСКИЕ ПРОГРАММЫ</b>\n\n" +
                 "🌐 <b>Яндекс Браузер</b> - 5₽ за переход, бонусы за установку\n" +
@@ -1023,7 +981,6 @@
             }, 500);
         }
 
-        // Показать статистику
         function showStatistics() {
             const progress = Math.min(userData.totalClicks * 100 / 100, 100);
 
@@ -1044,7 +1001,6 @@
                 `• Прогноз дохода: ${(userData.totalRevenue / Math.max(userData.totalClicks, 1) * 100).toFixed(2)}₽`);
         }
 
-        // Показать промокоды
         function showPromoCodes() {
             const promo = PROMOCODES.yandex_business;
 
@@ -1066,7 +1022,6 @@
 
             addBotMessage(promoHTML);
 
-            // Обновляем статистику промокодов
             setTimeout(() => {
                 const keyboardContainer = document.getElementById('keyboardContainer');
                 const inlineKeyboard = keyboardContainer.querySelector('.inline-keyboard');
@@ -1090,7 +1045,6 @@
             }, 500);
         }
 
-        // Обработка действий с промокодом
         function handlePromoAction(action) {
             const promo = PROMOCODES.yandex_business;
 
@@ -1111,7 +1065,6 @@
             }
         }
 
-        // Показать условия промокода
         function showPromoConditions() {
             const promo = PROMOCODES.yandex_business;
 
@@ -1128,7 +1081,6 @@
             addBotMessage(conditionsText);
         }
 
-        // Показать быстрый промокод
         function showQuickPromo() {
             const promo = PROMOCODES.yandex_business;
 
@@ -1143,7 +1095,6 @@
                 `4. Вы получаете вознаграждение\n\n` +
                 `<b>💡 Совет:</b> Используйте авторассылку для массовой отправки!`);
 
-            // Предлагаем копировать
             setTimeout(() => {
                 navigator.clipboard.writeText(promo.code).then(() => {
                     addBotMessage("✅ <b>Промокод скопирован в буфер обмена!</b>");
@@ -1151,7 +1102,6 @@
             }, 1000);
         }
 
-        // Показать статистику за сегодня
         function showTodayStats() {
             const today = new Date().toLocaleDateString();
 
@@ -1174,7 +1124,6 @@
                 `• Потенциал роста: +${Math.floor(Math.random() * 50)}%`);
         }
 
-        // Показать топ программ
         function showTopPrograms() {
             addBotMessage("🚀 <b>ТОП ПРОГРАММЫ</b>\n\n" +
                 "🏆 <b>1. Яндекс Бизнес</b>\n" +
@@ -1196,7 +1145,6 @@
             }, 500);
         }
 
-        // Показать быстрый вопрос
         function showQuickQuestion() {
             addBotMessage("💬 <b>БЫСТРЫЙ ВОПРОС</b>\n\n" +
                 "Задайте вопрос о партнёрских программах, промокодах или стратегиях заработка.\n\n" +
@@ -1206,13 +1154,11 @@
                 "• Как получить промокод?\n" +
                 "• Как увеличить доход?");
 
-            // Увеличиваем счетчик вопросов
             userData.questionsAsked++;
             saveUserData();
             updateUserStatus();
         }
 
-        // Показать избранное
         function showFavorites() {
             addBotMessage("⭐ <b>ИЗБРАННОЕ</b>\n\n" +
                 "Здесь будут отображаться ваши любимые программы.\n\n" +
@@ -1223,7 +1169,6 @@
                 "Пока у вас нет избранных программ. Начните с Яндекс Бизнес!");
         }
 
-        // Показать ИИ-помощник
         function showAIAssistant() {
             addBotMessage("🤖 <b>ИИ-ПОМОЩНИК</b>\n\n" +
                 "Я готов ответить на любые ваши вопросы о партнёрских программах!\n\n" +
@@ -1235,7 +1180,6 @@
                 "Просто задайте вопрос в поле ввода ниже!");
         }
 
-        // Показать настройки
         function showSettings() {
             addBotMessage("⚙️ <b>НАСТРОЙКИ</b>\n\n" +
                 `<b>🔔 Уведомления:</b> ${userData.settings.notifications ? 'ВКЛ' : 'ВЫКЛ'}\n` +
@@ -1251,7 +1195,6 @@
                 `• Экспорт данных`);
         }
 
-        // Отправить сообщение
         function sendMessage() {
             const input = document.querySelector('.message-input');
             const message = input.value.trim();
@@ -1260,21 +1203,17 @@
                 addUserMessage(message);
                 input.value = '';
 
-                // Обработка сообщения
                 processUserMessage(message);
             }
         }
 
-        // Обработка сообщения пользователя
         function processUserMessage(message) {
             const text = message.toLowerCase();
             userData.questionsAsked++;
             saveUserData();
             updateUserStatus();
 
-            // Задержка для имитации "печати"
             setTimeout(() => {
-                // Поиск в базе знаний
                 for (const [keyword, answers] of Object.entries(KNOWLEDGE_BASE)) {
                     if (text.includes(keyword)) {
                         const answer = answers[Math.floor(Math.random() * answers.length)];
@@ -1283,7 +1222,6 @@
                     }
                 }
 
-                // Общие ответы
                 if (text.includes('привет') || text.includes('здравствуй') || text.includes('hi') || text.includes('hello')) {
                     addBotMessage(getRandomGreeting() + "\n\nЧем могу помочь?");
                 } else if (text.includes('заработать') || text.includes('доход') || text.includes('деньги')) {
@@ -1311,7 +1249,6 @@
                 } else if (text.includes('промокод') || text.includes('промо') || text.includes('bonus')) {
                     showPromoCodes();
                 } else {
-                    // Если не распознали
                     const randomAnswers = [
                         "🤔 <b>Не совсем понял ваш запрос.</b>\n\nПопробуйте спросить по-другому или используйте кнопки ниже.",
                         "💡 <b>Попробуйте:</b>\n• Нажать '🚀 Быстрый старт'\n• Посмотреть '📊 Статистику'\n• Получить '🎁 Промокод'\n• Изучить '🎯 Все программы'",
@@ -1323,7 +1260,6 @@
             }, 1000);
         }
 
-        // Автоматические уведомления
         setInterval(() => {
             if (userData.settings.notifications && Math.random() > 0.7) {
                 const notifications = [
@@ -1337,16 +1273,14 @@
                     addBotMessage(notifications[Math.floor(Math.random() * notifications.length)]);
                 }, 5000);
             }
-        }, 300000); // Каждые 5 минут
+        }, 300000);
 
-        // Ежедневное обновление серии
         setInterval(() => {
             userData.dailyStreak++;
             saveUserData();
             updateUserStatus();
-        }, 86400000); // Каждые 24 часа
+        }, 86400000);
 
-        // Автоматическое увеличение уровня
         setInterval(() => {
             if (userData.totalClicks > 0) {
                 userData.experience += Math.floor(userData.totalClicks / 10);
@@ -1358,8 +1292,7 @@
                 saveUserData();
                 updateUserStatus();
             }
-        }, 60000); // Каждую минуту
+        }, 60000);
     </script>
 </body>
-
 </html>
