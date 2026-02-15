@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Data Intelligence Portal</title>
+
+    <!-- ПОДКЛЮЧАЕМ THREE.JS -->
+    <script src="{{ url_for('static', filename='js/three/three.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/three/OrbitControls.js') }}"></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #0a0a0a;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        #three-container {
+            width: 100%;
+            height: 70vh;
+            border: 1px solid #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <h1>3D Data Intelligence Portal</h1>
+
+    <!-- КОНТЕЙНЕР ДЛЯ 3D ГРАФИКИ -->
+    <div id="three-container"></div>
+
+    <!-- ТЕРМИНАЛ ИЛИ ДРУГИЕ ЭЛЕМЕНТЫ -->
+    <div id="terminal">
+        > Система запущена<br>
+        > 3D графика активирована
+    </div>
+
+    <script>
+        // =============================================
+        // КОД ДЛЯ 3D ГРАФИКИ
+        // =============================================
+
+        // Проверяем что Three.js загружен
+        if (typeof THREE === 'undefined') {
+            console.error('Three.js не загружен!');
+            document.getElementById('terminal').innerHTML += '> Ошибка: Three.js не загружен<br>';
+        } else {
+            document.getElementById('terminal').innerHTML += '> Three.js успешно загружен<br>';
+        }
+
+        // 1. СОЗДАЕМ СЦЕНУ, КАМЕРУ И РЕНДЕРЕР
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+
+        // 2. НАСТРАИВАЕМ РЕНДЕРЕР
+        renderer.setSize(window.innerWidth * 0.8, window.innerHeight * 0.7);
+        renderer.setClearColor(0x000000); // Черный фон
+        document.getElementById('three-container').appendChild(renderer.domElement);
+
+        // 3. ДОБАВЛЯЕМ ОСВЕЩЕНИЕ
+        const ambientLight = new THREE.AmbientLight(0x404040);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        directionalLight.position.set(1, 1, 1);
+        scene.add(directionalLight);
+
+        // 4. СОЗДАЕМ 3D ОБЪЕКТЫ (ПРИМЕР - СЕТКА ДАННЫХ)
+        const nodes = [];
+        const colors = [0xff0000, 0x00ff00, 0x0000ff, 0xffff00, 0xff00ff];
+
+        // Создаем 20 случайных узлов данных
+        for (let i = 0; i < 20; i++) {
+            const geometry = new THREE.SphereGeometry(0.3, 32, 32);
+            const material = new THREE.MeshPhongMaterial({
+                color: colors[i % colors.length],
+                emissive: colors[i % colors.length],
+                emissiveIntensity: 0.3
+            });
+
+            const sphere = new THREE.Mesh(geometry, material);
+            sphere.position.x = (Math.random() - 0.5) * 10;
+            sphere.position.y = (Math.random() - 0.5) * 10;
+            sphere.position.z = (Math.random() - 0.5) * 10;
+
+            scene.add(sphere);
+            nodes.push(sphere);
+        }
+
+        // 5. СОЗДАЕМ СОЕДИНЕНИЯ МЕЖДУ УЗЛАМИ
+        const lines = [];
+        for (let i = 0; i < 15; i++) {
+            const startNode = nodes[Math.floor(Math.random() * nodes.length)];
+            const endNode = nodes[Math.floor(Math.random() * nodes.length)];
+
+            const geometry = new THREE.BufferGeometry().setFromPoints([
+                new THREE.Vector3(startNode.position.x, startNode.position.y, startNode.position.z),
+                new THREE.Vector3(endNode.position.x, endNode.position.y, endNode.position.z)
+            ]);
+
+            const material = new THREE.LineBasicMaterial({
+                color: 0xffffff,
+                opacity: 0.3,
+                transparent: true
+            });
+
+            const line = new THREE.Line(geometry, material);
+            scene.add(line);
+            lines.push(line);
+        }
+
+        // 6. НАСТРАИВАЕМ КАМЕРУ
+        camera.position.z = 15;
+
+        // 7. ДОБАВЛЯЕМ УПРАВЛЕНИЕ КАМЕРОЙ
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+
+        // 8. ФУНКЦИЯ АНИМАЦИИ
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Вращаем узлы
+            nodes.forEach((node, index) => {
+                node.rotation.x += 0.01;
+                node.rotation.y += 0.01;
+            });
+
+            // Обновляем управление
+            controls.update();
+
+            // Рендерим сцену
+            renderer.render(scene, camera);
+        }
+
+        // ЗАПУСКАЕМ АНИМАЦИЮ
+        animate();
+
+        // 9. ОБРАБОТКА ИЗМЕНЕНИЯ РАЗМЕРА ОКНА
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth * 0.8, window.innerHeight * 0.7);
+        });
+
+        document.getElementById('terminal').innerHTML += '> 3D визуализация запущена<br>';
+    </script>
+</body>
+</html>
